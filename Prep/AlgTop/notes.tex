@@ -4,71 +4,14 @@
 \def\nterm {Summer}
 \def\nyear {2021}
 
+\setcounter{section}{-1}
 \input{../../prepHeader}
 
 \begin{document}
-  %\maketitle
+  \maketitle
 
 
-\section{Chapter 0 - Underlying Notions}
-{\centering \textbf{We are going to adopt the convention that every map is continuous unless otherwise stated.}}\\
-
-\noindent
-We want to be able to talk about ways to transform some shapes into other shapes and think about them then being equal. We do this by considering an $I \in [0, 1]$ that we can paramaterise a function by. So if we have two curves $s : X \to X$ and $t : X \to X$, we can define some $f : X \times I \to X$ such that,
-$$ \begin{cases}
-  f_0(x) &= s(x) \\
-  f_1(x) &= t(x)
-\end{cases} $$
-
-\begin{ndefi}[Deformation Retraction]
-  A Deformation retraction of a space $X$ onto an $A \subset X$ is a family of maps, $f_t : X \to X$ $t \in I$, such that, $f_0 = \1$, $f_t(X) = A$ and $f_t | A = \1$ $\forall t$. The family $f_t$ should be continuous in the sense that the associated map $X \times I \to X$, $(x, t) \mapsto f_t(x)$ is continuous.
-\end{ndefi}
-
-\begin{ndefi}[Mapping Cylinder]
-  A mapping cylinder, $M_f$, for a $f : X \to Y$ is the quotient space of the disjoint union $(X \times I)\coprod Y$, obtained by identifying each $(x, 1) \in X \times I$ with $f(x) \in Y$.
-\end{ndefi}
-
-A mapping cylinder deformation, of $f$, retracts to $Y$.\\
-
-A deformation retraction $f_t : X \to X$ is just a special case of a homotopy, which is just simply any family of maps, $f_t : X \times I \to Y$, given by $F(x, t) = f_t (x)$ is continuous.
-
-\begin{ndefi}[Homotopic]
-  One says two maps are homotopic if there exists a homotopy $f_t$ connecting them and one writes $f_0 \hm f_1$
-\end{ndefi}
-
-\textbf{Retractions are the topological analogue of projection operators.}
-
-\begin{ndefi}[Homotopy Relative]
-  A homotopy $f_t : X \to Y$ whose restriction to a subspace $A \subset X$ is independent of $t$ is homotopy relative, written as homotopy rel.
-\end{ndefi}
-
-
-\begin{ndefi}[Homotopy Equivalence]
-  A map $f : X \to Y$ is called a homotopy equivalence if there exists a $g : Y \to X$ such that $fg \hm \1$ and $gf \hm \1$.
-\end{ndefi}
-
-Moreover, we can now say that $X$ and $Y$ are homotopy equivalent or have the same homotopy type.
-
-\begin{nlemma}
-  Any two spaces $X$ and $Y$ are homotopy equivilent if there exists some other space $Z$ containing both $X$ and $Y$ are deformation retracts.
-\end{nlemma}
-
-\begin{ndefi}[Contractible]
-  A space that has the homotopy type of a point is contractible.
-\end{ndefi}
-
-This amounts to the identity map of this space to be nullhomotopic, that is homotopic to a constant map.
-
-\subsection{Cell Complexes}
-
-To construct a cell complex, let us follow these rules,
-\begin{enumerate}
-  \item Start with a discrete set $X^0$, whose points are regarded as $0$-cells.
-  \item inductively, form the $n$-skeleton $X^n$ from $X^{n-1}$ by attaching $n$-cells $e^n_\a$ via maps $\phi_\a : S^{n-1} \to X^{n-1}$ with a collection of $n$-disks $D^n_\a$ under the identifications $x \sim \phi_\a (x)$ for $x \in \partial D^n_\a$. Thus $X^n = X^{n-1}\coprod_\a e^n_\a$.
-  \item We can either stop at a finite amount or continue indefinitely. in the latter, $X$ is given a weak topology, A set $A \subset X$ is open if and only if $A \cap X^n$ is open in $X^n$ for each $n$. This similarly works for closed.
-\end{enumerate}
-
-$X$ is a cell complex or a CW complex. 
+\input{./Chapters/0}
 
 
 
