@@ -1,0 +1,357 @@
+% !TEX root = ../notes.tex
+
+\section{The Fundamental Group}
+
+\subsection{Circles and Stuff}
+We are going to talk about circles and loops and use these to talk about the ideas of groups.
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}
+    \begin{knot}[
+        % draft mode=crossings ,
+        clip width=3,
+        flip crossing=1,
+        flip crossing=2,
+        ]
+        \strand [ultra thick] (0,0) circle (1.0cm);
+        \strand [ultra thick] (1,0) circle (1.0cm);
+    \end{knot}
+  \end{tikzpicture}
+\end{figure}
+Then we can define something known as a loop,
+\begin{ndefi}[Loop]
+  An oriented curve that has the same start and end point.
+\end{ndefi}
+Loops with the same start point can be glued together to create one loop and we can state the following,
+\begin{nlemma}[]
+  If we take two loops curling about a circle, then denote the number of turns as $B_m$ and $B_n$ and then as we connect these loops, we can say we have the curve $B_{m+n}$.
+\end{nlemma}
+The proof of this is simple and obvious. We can do a similar thing with Borromean rings.
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+\begin{knot}[
+    %draft mode=crossings ,
+    clip width=4,
+    ]
+    \strand [ultra thick] (0,0) circle (1.0cm);
+    \strand [ultra thick] (1,0) circle (1.0cm);
+    \strand [ultra thick] (0.5,1) circle (1.0cm);
+    \flipcrossings{1, 2, 5, 6}
+\end{knot}
+\end{tikzpicture}
+\end{figure}
+and pull the third ring into a $U$ shape between the other two rings. We can then talk about a group, where going through the circle $A$, one way is $a$, the other being $b^{-1}$. Similarly, we can talk about $b$ and $b^{-1}$. Hence, the Borromean rings have a loop of $aba^{-1}b^{-1}$. Moving onwards towards the fundamental group, we can say this,
+\begin{intu}
+  The fundamental group of a space $X$ will be defined so that its elements are loops in $X$ starting and ending at a point $x_0 \in X$.
+\end{intu}
+Loops in the fundamental group are unique up to deformations.
+
+
+\subsection{Basic Constructions}
+We are going to define some stuff, firstly paths,
+\begin{ndefi}[Path]
+  A path in a space $X$ we are talking about $f : I \to X$
+\end{ndefi}
+and now we formalise a homotopy,
+\begin{ndefi}[Homotopy of paths]
+  A homotopy of paths in $X$ is a family $f_t : I \to X$ for some $t \in [0,\,1]$ and such that,
+  \begin{itemize}
+    \item $f_t(0) = x_0$ and $f_t(1) = x_1$, the endpoints of the curve are independent of $t$.
+    \item The associated map $F : I \times I \to X$ is defined by $F(s, t) = f_t(s)$.
+  \end{itemize}
+  When we can say that $f_0$ and $f_1$ are connected by a homotopy $f_t$, they are said to be homotopic, notated by $f_0 \hm f_1$.
+\end{ndefi}
+
+Now we can define some sort of equivalence on them in the following proposition,
+\begin{nprop}
+  The relation of homotopy on paths with fixed endpoints in any space is an equivalence relation.
+\end{nprop}
+\begin{proof}[]
+  We need to prove the following three things,
+  \begin{itemize}
+    \item \textbf{Reflexivity: }This is evident, where we just take $f = f_t$.
+    \item \textbf{Symmetry: }This is also evident, we just take the inverse homotopy, i.e. $f_{1-t}$.
+    \item \textbf{Transitivity: }For transitivity, we construct a homotopy from $f_0$ to $f_1$, then $g_0$ and $g_1$. We then define them as, $H(s, t) =F(s, 2t)$ for $t \in \left[0,\,\frac{1}{2}\right]$ and $H(s, t) = G(s, 2t-1)$ for $t \in \left[\frac{1}{2},\,1\right]$. It's continuous on the whole as it's continuous on it's parts.
+  \end{itemize}
+\end{proof}
+
+From this proof we can define a product paths,
+\begin{ndefi}[Product Paths]
+  If we have two paths, $f, g : I \to X$ such that $f(1) = g(0)$, there is a \textbf{composition} or \textbf{product path} $f \cdot g$ that traverses first $f$, then $g$, defined by,
+  $$ \begin{cases}
+    f(s) & s \in \left[0 ,\, \frac{1}{2}\right]\\
+    g(2s-1) & s \in \left[\frac{1}{2},\, 1\right]
+  \end{cases} $$
+\end{ndefi}
+
+\begin{ndefi}[Fundemental Group]
+  We define the Fundemental group as the set of all homotopy classes $[f]$ for loops, $f: I \to X$ at the basepoint $x_0$. Denoted $\pi_1(X, x_0)$
+\end{ndefi}
+
+Now, we don't really know if this a group yet, so let's prove it.
+\begin{nprop}
+  $\pi_1(X, x_0)$ is a group with respect to the product, $[f][g] = [f \cdot g]$
+\end{nprop}
+\begin{proof}[]
+  We just have to prove the three axioms of the group, as we know that $[f][g] = [f \cdot g]$ is well defined. We are going to consider a reparameterisation of our maps, through a $\phi : I \to I$ where $\phi(0) = 0$ and $\phi(1)=1$, this preserves the homotopy class as $f\phi \hm f$ and finally define the homotopy of $\phi$, just to be the linear homotopy.
+  \begin{itemize}
+    \item \textbf{Inverse: }We let the inverse loop, just be the loop where we replace $t \mapsto 1 - t$
+    \item \textbf{Identity: }We just let the identity be the constant map.
+    \item \textbf{Associativity: }This is basically taking three loops and then just joining them, so you go across every loop, just at different speeds.
+  \end{itemize}
+\end{proof}
+
+If we take some $h : I \to X$ and let it be a path, then we can consider the fact of whether the following fundamental groups are equivalent, $\pi_1(X, x_0)$ and $\pi_1(X, x_1)$. Luckily, if we let $h$ start at $x_0$ and end at $x_1$, then we can consider for each loop $f$ based at $x_1$ to another loop $h \cdot f \cdot \overline{h}$ which starts at $x_0$, we note that $\overline{h}$ is just the reversal of $h$. Hence, we now define a change of basepoint map,
+\begin{ndefi}[Change Of Basepoint]
+  A map $\b_h: \pi_1(X, x_1) \to \pi_1(X, x_0)$ by $\b_h[f] = [h \cdot f \cdot \overline{h}]$.
+\end{ndefi}
+This is well defined because if $f_t$ is a homotopy of loops, then we have an inverse nicely.
+
+\begin{nprop}
+  The map $\b_h$ is an isomorphism
+\end{nprop}
+\begin{proof}
+  Notice,
+  \begin{align*}
+    \b_h[f \cdot g] &= [h \cdot f \cdot g \cdot \overline{h}]\\
+    &= [h \cdot f \cdot \ol{h} \cdot h \cdot g \cdot \ol{h}]\\
+    &= \b_h[f] \b_{h}[g]
+  \end{align*}
+  and it has an inverse as,
+  \begin{align*}
+    \b_{h}\b_{\ol{h}}[f] &= \b_h[\ol{h} \cdot f \cdot h]\\
+    &= [h \cdot \ol{h} \cdot f \cdot h \cdot \ol{h}]\\
+    &= [f]
+  \end{align*}
+  and similarly for the other direction.
+\end{proof}
+
+
+\begin{nprop}
+  A space $X$ is simply connected iff there is a unique homotopy class of paths connecting any two points in $X$.
+\end{nprop}
+
+\begin{proof}[]
+  This proof relies for the forward direction on proving uniqueness of paths, then if $f \hm f \cdot \overline{g} \cdot g \hm g$ and so it's unique. The other direction is if there is only one homotopy class, then all loops will be homotopic to the constant loop and so, $\pi_1(X, x_0) = 0$.
+\end{proof}
+
+\subsection{Fundemental Group of the Circle}
+
+We are going to try and prove that $\fg {S^1} \hm \Z$
+
+\begin{nthm}[]
+  $\fg {S^1}$ is an infinite cyclic group generated by the homotopy class of the loop $\omega(s) = (\cos 2\pi s, \sin 2\pi s)$ based at $(1, 0)$.
+\end{nthm}
+
+Before we do this, we shall talk about some stuff \footnote{A James note to James, I hate this section of the book, it's messy and not very readable.}
+
+\begin{ndefi}[Lift]
+  If we take a $p : \R \to S^1$ such that, $p(s) = (\cos 2\pi s, \sin 2\pi s)$ and another, $\wt{\omega} : I \to \R$, that we define as $\wt{\omega}_n (s) = ns$. Then, we call $\wt{\omega}_n$ the \textbf{lift} of $\omega_n$.
+\end{ndefi}
+
+and also,
+\begin{ndefi}[Covering Space]
+  A \textbf{covering space} of a space $X$ consists of a space $\wt{X}$ and a map, $p : \wt{X} \to X$ satisfying the following,
+  \begin{itemize}
+    \item For each $x \in X$ there is an open neighbourhood $U$ of $x$ such that $p^{-1}(U)$ is a union of disjoint open sets each of which is mapped homeomorphically onto $U$ by $p$.
+  \end{itemize}
+\end{ndefi}
+
+\begin{ndefi}[Evenly Covered]
+  We call such a $U$, as in the previous definition, \textbf{evenly covered}.
+\end{ndefi}
+
+Here are three important things that we will need to prove the theorem,
+\begin{enumerate}
+  \item For each path starting at $x_0\in X$ and each $\wt{x_0} \in p^{-1}(x_0)$ there exists a unique lift $\wt{f} : I \to \wt{X}$ starting at $\wt{x_0}$.
+  \item For each homotopy $f_t : I \to X$ of paths starting at $x_0$ and each $\wt{x_0} \in p^{-1}(x_0)$ there is a unique lifted homotopy $\wt{f} : I \to \wt{X}$ of paths starting at $\wt{x_0}$
+  \item Given a map $F : Y \times I \to X$ and a map $\wt{F}: Y \times \{0\} \to wt{X}$ lifting $F | Y \times \{0\}$, then there is a unique map $\wt{F} : Y \times I \to \wt{X}$ lifting $F$ and restricting to the given $\wt{F}$ on $Y \times \{0\}$.
+\end{enumerate}
+I shall not state the proofs, but they are true.
+
+\begin{proof}[\textbf{Proof of Theorem 1.12}]
+  To prove this, take a loop with basepoint $(1, 0)$ and let that be an element of $\pi_1(S^1, x_0)$. Then apply $(1)$, then note that $\wt{f}$ starts at $0$ ends at some integer. Then we have another path from $0$ to $n$, $\omega_n$, such that ${f} \hm \omega_n$ so that, $[f] = [\omega_n]$.\\
+  Next prove that $n$ is unique, by stating two $\omega$'s and then let them be delimited by $n$ and $m$, then prove that $n = m$ by using $(b)$ and then the uniqueness part of $(a)$.
+\end{proof}
+Then, finally both, $(a)$ and $(b)$ can be derived from $(c)$. For $(a)$, let $Y$ be a point and for $(b)$ we let $Y = I$.\\
+
+\begin{nthm}[FTA]
+  Every nonconstant polynomial with coefficients in $\C$ has roots in $\C$.
+\end{nthm}
+\begin{proof}[]
+  Take a polynomial ($p(z) = z^n + a_1z^{n-1} + \dots + a_n$) that has no roots in $\C$ and then consider,
+  $$ f_r(s) = \frac{p(re^{2\pi is})/p(r)}{|p(re^{2\pi is})/p(r)|} $$
+  which is a loop and as you vary $r$, you get a homotopy of loops based at $1$. Hence, $[f_r] \in \fg {S^1}$. Now choose an $r > 1$ and $r > |a_1| + \dots + |a_n|$. Then for $|z| = r$ we have,
+  $$ |z^n| > (|a_1| + \dots + |a_n|)|z^{n-1}| > |a_1z^{n-1}| + \dots + |a_n| \ge |a_1z^{n-1} + \dots + a_n| $$
+  Now define a $p_t = z^n + t(a_1z^{n-1} + \dots + a_n)$ and then define a lift and then use Theorem 1.12. This gives, $[\omega_n] = [f_r] = 0$ and hence $n = 0$ and so $p(z) = a_0$ and so that is the only polynomial with no roots and so FTA proved.
+\end{proof}
+
+\begin{nthm}[Brouwers fixed points in dimension 2]
+  Every continuous map $h : D^2 \to D^2$ has a fixed point, that is, a point $x \in D^2$ with $h(x) = x$.
+\end{nthm}
+\begin{proof}
+  We are going to assume that $h(x) \neq x$ for all $x \in D^2$, then we can define a map $r : D^2 \to S^1$ as defined in the figure. It's obvious that $r$ is continuous. To describe $r(x)$ we say, $r(x) = x$ if $x \in S^1$. Thus $r$ is a retraction of $D^2$ onto $S^1$. Now show that this retraction can't exist.\\
+  Let $f_0$ be any loop in $S^1$. In $D^2$ there is a homotopy of $f_0$ to a constant loop. Since the retraction $r$ is the identity on $S^1$, then $rf_1$ is a homotopy in $S^1$ from $f_0$ to $x_0$, however we know that $\pi_1(S^1) \ne 0$, hence contradiction is found.
+  \begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[thick, ->] (1.3, 0.6) -- (-1.414, -1.414);
+    \draw[thick] (0,0) circle (2 cm);
+    \fill[fill=red] (1.3,0.6) circle (1.5pt);
+    \node[above] at (1.3, 0.6) {$h(x)$};
+    \fill[fill=red] (-1.414, -1.414) circle (1.5pt);
+    \node[left] at (-1.414, -1.414) {$r(x)$};
+    \fill[fill=red] (-0.0571, -0.4071) circle (1.5pt);
+    \node[below] at (-0.0571, -0.4071) {$x$};
+  \end{tikzpicture}
+  \caption{Brouwers in 2D}
+  \end{figure}
+  \end{proof}
+
+\begin{nthm}[2D Borsuk-Ulam]
+  For every continuous map $f : S^2 \to \R^2$ there exists a pair of antipodal points $x$ and $-x$ in $S^2$ with $f(x) = f(-x)$.
+\end{nthm}
+
+\begin{ncor}
+  Whenever $S^2$ van be represented as the union of three closed sets, then at least one of those sets contain a pair of antipodal points.
+\end{ncor}
+\begin{proof}
+  Consider a measure distance $d_i : S^2 \to \R$ and define it as, $d_i(x) = \inf_{y \in A_i} \left | x - y\right|$. Then apply Borsuk-Ulam and consider cases.
+\end{proof}
+
+We choose three as this is the best case, for example consider a sphere inscribed in a tetrahedron. This object doesn't contain a pair of antipodal points. We can prove a similar result for $S^n$ with $n+1$ different sets.
+
+\begin{figure}[!ht]
+\centering
+\tdplotsetmaincoords{60}{111}
+\begin{tikzpicture}[tdplot_main_coords]
+ \coordinate (O) at (0,0,0);
+% S^2
+\draw[tdplot_screen_coords] (0,0,0) circle (3);
+\path (xyz spherical cs:radius=3,latitude=90,longitude=00)
+ node[fill,circle,inner sep=2pt]{};
+\foreach \X in {0,1,2}
+{\draw plot[variable=\t,domain=90:90-109.5,smooth]
+ (xyz spherical cs:radius=3,latitude=\t,longitude=\X*120)
+ node[fill,circle,inner sep=2pt]{};}
+\draw plot[variable=\t,domain=0:360,smooth]
+(xyz spherical cs:radius=3,latitude={90-109.5-14*abs(sin(1.5*\t))},longitude=\t);
+\end{tikzpicture}
+\caption{A sphere split into four}
+\end{figure}
+
+We can now say some more about our fundemental group,
+\begin{nprop}
+  $\fg {X \times Y} \cong \fg X \times \fg Y$ if $X$ and $Y$ are both path connected
+\end{nprop}
+\begin{proof}
+  Use the fact that $f : Z \to X\times Y$ is path connected if and only if $g : Z \to X$ and $h : Z \to Y$ are continuous when $f$ is defined as $f(z) = (g(z),\, h(z))$. We now say that a loop $f$ in $X \times Y$ is equivalent to a pair of loops $g$ and $h$ in $X$ and $Y$ respectively, similarly with homotopies. Thus we get a bijection. Then we see $[f] \mapsto ([g],\, [h])$.
+\end{proof}
+
+\begin{eg}[Torus]
+  We can define a torus as $S^1 \times S^1$ and now using our new proposition, we can talk about,
+  $$ \fg {S^1 \times S^1} \cong \fg {S^1} \times \fg {S^1} \cong \Z \times \Z  $$
+  Hence, we can nicely talk about a point $(p, q) \in \Z^2$ as $p$ times around one $S^1$ factor and $q$ times around the other $S^1$ factor. If we take $(3, 2)$, we get the trefoil knot.
+  \begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}
+  \begin{knot}[
+    consider self intersections=true,
+  %  draft mode=crossings,
+    flip crossing=2,
+    only when rendering/.style={
+  %    show curve controls
+    }
+    ]
+  \strand (0,1) .. controls +(1.1,0) and +(120:-1.1) .. (210:1) .. controls +(120:1.1) and +(60:1.1) .. (-30:1) .. controls +(60:-1.1) and +(-1.1,0) .. (0,1);
+  \end{knot}
+  \end{tikzpicture}
+  \end{figure}
+\end{eg}
+
+\subsection{Induced Homomorpisms}
+We can consider our $\phi : X \to Y$ where $\phi : \fg {X, x_0} \to \fg {Y, y_0}$ and it takes the basepoint $x_0$ to $y_0$. Then we can say that $\phi_{*} : \fg{X, x_0} \to \fg{Y, y_0}$ defined by composing loops $f : I \to X$ based at $x_0$ with $\phi$, so $\phi_{*}[f] = [\phi f]$. The induced homomorphism $\phi_{*}$ is well-defined since a homotopy $f_t$ of loops based at $x_0$ yields a homotopy of loops $\phi f_t$ based at $y_0$. So,
+$$ \phi_{*}[f_0] = [\phi f_0] = [\phi f_1] = \phi_{*}[f_1] $$
+We can also say $\phi_{*}$ is a homomorphism as,
+$$ \phi (f \centerdot g) = (\phi f) \cs (\phi g) $$
+as we can consider $\phi f(2s)$ for $0 \le s \le \frac{1}{2}$ and $\phi g (2s - 1)$ for $\frac{1}{2} \le s \le 1$.
+\begin{ndefi}[Induced homomorphisms]
+  Two basic properties of induced homomorphisms are,
+  \begin{itemize}
+    \item $(\psi \phi)_{*} = \psi_* \phi_*$ for a composition $\begin{tikzcd}
+    	{(X, x_0)} & {(Y, y_0)} & {(Z, z_0)}
+    	\arrow["\psi", from=1-1, to=1-2]
+    	\arrow["\phi", from=1-2, to=1-3]
+    \end{tikzcd}$.
+    \item $\1_* = \1$ i.e. the identity map, $\1 : X \to X$ induces the identity map $\1 : \fg {X, x_0} \to \fg {X, x_0}$
+  \end{itemize}
+  Note that these two things make the fundemental group a functor\footnote{CATEGORY THEORY TIME}
+\end{ndefi}
+
+\begin{nprop}
+  $\pi_1 (S^n) = 0$ for $n \ge 2$
+\end{nprop}
+
+To prove this, we will need the following,
+
+\begin{nprop}
+  If a space $X$ is the union of a collection of path-connected open sets $A_\a$ each containing the basepoint $x_0 \in X$ and if each intersection $A_\a \cap A_\b$ is a path-connected, then every loop in $X$ at $x_0$ is homotopic to a product of loops each of which is contained in a single $A_\a$.
+\end{nprop}
+
+\begin{proof}
+  Take a loop at a basepoint $x_0$ and then a partition $0 = s_0 < s_1 < s_2 < \dots < s_m = 1$ of $I$ such that each subinterval $[s_{i-1},\, s_i]$ is mapped to a single $A_\a$. \\
+  Now denote $A_i$ as $f([s_{i-1},\, s_i])$ and $f_i$ by restricting $f$ to $[s_{i-1},\, s_i]$. Then, as we have path connected sets, we can take a path from $x_0$ to $f(s_i) \in A_{i} \cap A_{i+1}$ and hence consider,
+  $$ (f_1 \cs \ol{g_1}) \cs (g_1 \cs f_2 \cs \ol{g_2}) \cs (g_2 \cs f_3 \cs \ol{g_3}) \cs \dots \cs (g_{m-1} \cs {f_{m}}) $$
+  and it's homotopic to $f$! Finally this loop is just the composition of a load of loops in each of the subsets.
+\end{proof}
+
+\begin{proof}[{Proof of Prop 1.22}]
+  We can take $S^n$ and express it as two open sets $A_1$ and $A_2$ (each homeomorphic to $\R^n$), such that $A_1 \cap A_2$ is homeomorphic to $S^{n-1} \times \R$. Choose a basepoint $x_0 \in A_1 \cap A_2$. If $n \ge 2$ then $A_1 \cap A_2$ is path connected. Hence, $\pi_1 {A_1} = \pi_1 {A_2} = 0$. Hence, every loop in $S^n$ is nullhomotopic.
+\end{proof}
+
+\begin{ncor}
+  $\R^2$ is not homeomorphic to $\R^n$ for $n \ne 2$
+\end{ncor}
+\begin{proof}[]
+  Suppose we have a homeomorphism and then for $n=1$, it's trivial. Then, for $n>2$ we consider the fundemental groups and then it is trivial for everything but $n=2$.
+\end{proof}
+
+\begin{nprop}
+  If a space $X$ retracts onto a space $A$, then the homeomorphism induced by the inclusion map, $i : A \emd X$ is injective. If $A$ is a deformation retract, then $i_*$ is a isomorphism.
+\end{nprop}
+
+\begin{proof}[]
+  If $r : X \to A$ is a retraction, then $ri = r_*i_* = \1$, which implies that $i_*$ is injective. If $r_t : X \to X$ is a deformation retraction, then we can say that there is a loop such that $r_t f$ gives a homotopy, so $i_*$ is also surjective.
+\end{proof}
+
+\begin{ndefi}[Basepoint-preserving homotopy]
+  We have a $\phi_t : (X, x_0) \to (Y, y_0)$ such that it is the case that $\phi_t (x_0) = y_0$ for all $t$.
+\end{ndefi}
+
+\begin{pprop}[Induced homomorphism]
+  We can now talk about another basic property of induced homomorphisms,
+  \begin{itemize}
+    \item If $\phi_t : (X, x_0) \to (Y, y_0)$ is a basepoint-preserving homotopy, then $\phi_{0*} = \phi_{1*}$
+  \end{itemize}
+\end{pprop}
+
+Now, at this point, we are really rather annoyed with all this basepoint nonsense, hence we look to drop this condition,
+
+\begin{nprop}
+  If $\phi : X\to Y$ is a homotopy equivilence, then the induced homeomorphism $\phi_* : \fg { X, x_0} \to \fg {Y, \phi (x_0)}$ is an isomorphism for all $x_0 \in X$.
+\end{nprop}
+To prove this, we will prove the following,
+\begin{nlemma}[]
+  If $\phi_t : X \to Y$ is a homotopy and $h$ is the path $\phi_t(x_0)$ formed by the images of a basepoint $x_0\in X$, then the three maps in the diagram below satisfy $\phi_{0*} = \b_h \phi_{1*}$
+\end{nlemma}
+
+\[\begin{tikzcd}
+	&& {\pi_1 (Y, \phi_1(x_0))} \\
+	{\pi_1 (X, x_0)} \\
+	&& {\pi_1 (Y, \phi_0(x_0))}
+	\arrow["{\phi_{1*}}", from=2-1, to=1-3]
+	\arrow["{\phi_{0*}}"', from=2-1, to=3-3]
+	\arrow["{\beta_h}", from=1-3, to=3-3]
+\end{tikzcd}\]
