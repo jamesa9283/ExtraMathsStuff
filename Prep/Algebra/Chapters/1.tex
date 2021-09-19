@@ -1,0 +1,69 @@
+% !TEX root = ../notes.tex
+
+
+\section{Monoids and Groups}
+Let's start from the beginning as the beginning is a good place to start,
+\subsection{Monoids}
+\begin{ndefi}[Monoid]
+  A triple $(M, p, e)$ where $M$ is a nonempty set, or carrier, $p$ is an associative binary operation and $e$ is an identity such that,
+  $p(e, a) = p(a, e) = a$
+\end{ndefi}
+If we let $p$ be non-associative, then we have a \textit{monad} and if we drop the hypothesys on $1$, then we get a \textit{semigroup}.
+\begin{nlemma}[Unique Identity]
+  The identity of a monoid is unique.
+\end{nlemma}
+We can define a submonoid,
+\begin{ndefi}[Submonoid]
+  A subset $N$ of $M$ is a submonoid if it contains $e$ and id closed under $p$.
+\end{ndefi}
+\begin{ndefi}[Finite Monoid]
+  A monoid is said to be finite if it has a finite number of elements. We shall call it's cardinality, it's \textit{order}.
+\end{ndefi}
+\subsection{Groups}
+An element $u$ of a monoid is said to invertible if there exists a $v \in M$ such that,
+$$ uv = 1 = vu $$
+
+\begin{ndefi}[Group]
+  A group $G$ is a monoid all of whose elements are invertible.
+\end{ndefi}
+We define the subgroup in the same way as the submonoid.
+\begin{ndefi}[Group of Units]
+  If we take a monoid $M$, then we can denote all of the units as a set $U(M)$. Then we can prove this is a group and call it a group of units.
+\end{ndefi}
+
+If we now just take a load of monoids or groups, we can create another monoid or group out of them. Take $M_1, \dots, M_n$ and then consider $M = M_1 \times \dots \times M_n$, we introduce the following product,
+$$ (a_1, a_2, \dots, a_n)(b_1, b_2, \dots, b_n) = (a_1b_1, a_2b_2, \dots, a_nb_n) $$
+We call this the direct product of monoids and groups.
+
+\subsection{Isomorphisms}
+We can call two groups, basically the same using ismorphisms,
+\begin{ndefi}[Isomorphism]
+  Two monoids $(M, p, 1)$ and $(M', p', 1')$ are said to be isomorphic if there exists a bijective map $\eta$ of $M$ to $M'$ such that,
+  $$ \eta(1)=1' \qquad \eta(x\circ y)=\eta(x)\eta(y) \qquad x, y \in M $$
+  This shall be denoted as $M \cong M'$
+\end{ndefi}
+
+\begin{eg}
+  We can find an ismorphism between $(\R, +, 0)$ and $(\R^+, \cdot, 1)$. We just need to find an $\eta$ and that here is just, $\eta(x) = e^x$ as we can say,
+  $$ e^{x+y}=e^xe^y $$
+  This then has an inverse $y \mapsto \log y$ and hence is bijective.
+\end{eg}
+
+\begin{nthm}[Cayley Theorem for Monoids and Groups]
+  The following is true:
+  \begin{enumerate}
+    \item Any monoid is isomorphic to a monoid of transformations
+    \item Any group is isomorphic to a transformation group.
+  \end{enumerate}
+\end{nthm}
+
+\begin{proof} We shall treat two parts of the theorem individually
+  \begin{enumerate}
+    \item Firstly, we are going to take a monoid $M$ and consider the map $a_L : a \to ax$ for an $a \in M$, note that this map is always in $M$. Now we claim that $\{a_L : a \in M\}$ is a monoid of transformations. We can see this is closed under composition, then we can consider $a_Lb_L$ and see that this is just $x \to a (bx)$ and by the associative law $x \to (ab)x$ and so, $a_lb_L = (ab)_L$. So $a \to a_L$ is an isomorphism of $M$ onto the monoid of transformations. This map is obviously surjective and we can also say it is injective as if $a_L = b_L$ then $a = a_L 1 = b_L1 = b$
+    \item If we have $G$ as a group, then everything follows from $(1)$ if we can see that $G_L$ is the group of transformations. We need to show that $a_L$ is bijective and $G_L$ is closed under inverses. We can see this from $1_L = (a^{-1}a)_L = (a^{-1})_La_L$ and $1_L = a_L(a^{-1})_L$
+  \end{enumerate}
+\end{proof}
+
+\begin{ncor}
+  Any finite group of order $n$ is isomorphic to some subgroup of $S_n$.
+\end{ncor}
