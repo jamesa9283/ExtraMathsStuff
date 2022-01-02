@@ -67,3 +67,20 @@ We can call two groups, basically the same using ismorphisms,
 \begin{ncor}
   Any finite group of order $n$ is isomorphic to some subgroup of $S_n$.
 \end{ncor}
+
+\subsection{Generalised Associativity, Commutativity}
+Associativity lets us just consider any string of multiplications and just ignore the brackets as we can preform the multiplications in any order.
+\begin{ndefi}[Commutativity]
+  For all $a, b \in M$ where $M$ is a monoid, if the following holds,
+  $$ ab = ba $$
+  Then we say we have a commutative monoid or abelian monoid.
+\end{ndefi}
+
+\noindent
+When we defined the identity we said for some $a \in M$, we have $a \cdot e = a = e \cdot a$. We notice that $e$ is commutative in every monoid (and group). We can consider something more general than this now, we can consider all the elements of a group or a monoid that are commutative, the centraliser.
+\begin{ndefi}[Centraliser]
+  Let $M$ be a monoid, then the centraliser of $m \in M$ is,
+  $$ C_M(m) = \{ n \in M : mn = nm \} $$
+  Furthermore we define the centre of the monoid (or group) as,
+  $$ C(M) = \bigcap_{m \in M} C_M(m) $$
+\end{ndefi}
