@@ -1,0 +1,149 @@
+% !TEX root = ../notes.tex
+
+\section{Introduction}
+
+We consider a fluid flow as a function, $\vec u = \vec u(\vec x, t)$. We are usually working in $\R^3$ and so we further consider $\vec u = (u(x, y, z, t), v(x, y, z, t), w(x, y, z, t))$. We can talk about steady state flow,
+$$ \pd{\vec{u}}{t} = 0 $$
+We define a 2D fluid flow,
+$$ \vec u = (u(x, y, t), v(x, y, t), 0) $$
+and a steady 2D fluid flow,
+$$ \vec u = (u(x, y), v(x, y), 0) $$
+These are idealisations and they don't necessarily happen in real life, but they are nice places to start from. We consider streamlines, these are curves with the same direction to the flow at a certain point. These are defined as, $x(s), y(s)$ and $z(s)$ found from,
+$$ \frac{\di x s}{u} = \frac{\di y s}{v} = \frac{\di z s}{w} $$
+
+\subsection{Rate of Change `following the fluid'}
+We now take some sort of quantity in the flow $f(x, y, z, t)$ and we can talk about $\pd f t$ which is the rate of change of the fluid for a fixed spatial segment. We can consider the change when the flow changes by the material derivative,
+$$ \Di f t = \dit [f(x(t), y(t), z(t), t)] $$
+where we expect $\di x t = u$, $\di y t = v$ and $\di z t = w$. Therefore, we can write them as,
+$$ \Di f t = \pd f t + u\pd f x + v\pd f y + w\pd f z = \pd f t + (\vec u \cdot \nab) f $$
+We can now consider the acceleration of the fluid flow as,
+$$ \Di {\vec u} t = \pd {\vec u} t + (\vec u \cdot \nab)\vec u $$
+
+\begin{eg}
+  Consider $u = -\O y$, $v = \O x$ and $w = 0$, then we can see that $\pd {\vec u} t = 0$ because the flow is steady, but
+  \begin{align*}
+    (\vec u \cdot \nab)\vec u &= \left( -\O y \pd{}{x} + \O x\pd{}{y} \right)(-\O y, \O x, 0)\\
+    &= -\O^2 (x, y, 0)
+  \end{align*}
+  Then we have some sort of centrifugal force towards in rotation axis.
+\end{eg}
+
+\noindent
+If we have a steady flow then $\Di f t = (\vec u \cdot \nab) \vec f$. We can see this in another way, if we have some $\vec e_s$ that is parallel to the streamline, then,
+$$ \vec u \cdot \nab f = |\vec u|\vec e_s \cdot \nab f = |\vec u|\pd f s $$
+We note if $\vec u \cdot \nab f = 0$, then this means that $f$ is constant along a streamline for a steady flow. Also $\Di f t = 0$ means that $f$ is constant for some fluid element.
+
+\subsection{Ideal Fluid Equations}
+An ideal fluid is one that,
+\begin{enumerate}
+  \item is incompressible,
+  \item density, $\rho$, is constant,
+  \item the force exerted on a geometric surface element is,
+  $$ p \vec n \d S $$
+  where $p(x, y, z, t)$ is a scalar function called the pressure.
+\end{enumerate}
+
+\noindent
+We consider each of these three properties. We consider (i), first. Consider a fixed closed surface $S$ drawn in the fluid, with outward normal $\vec n$. Fluid enters and exists the volume $V$ along the boundary and so can see the volume of fluid is,
+$$ \int_S \vec u \cdot \vec n \,dS = \int_V \nab \cdot \vec u \,dV = 0 $$
+As $V$ is arbitrary, this must be true for all regions. Consider if $\nab \cdot \vec u > 0$, then $\nab \cdot\vec u > 0$ in some small ball around a point, however this would violate the equation above. We can also use a similar argument for $\nab \cdot \vec u < 0$. Hence
+\begin{equation}
+  \nab \cdot \vec u = 0.
+\end{equation}
+
+\noindent
+The second condition is important and one we will assume quite a bit. For the implication of (iii), consider a surface $S$ enclosing some blob of fluid. The force exerted by the fluid on some surface element $\d S$ is given in the condition and so the net force exerted is,
+$$ -\int_S p\vec n\, dS = -\int_V \nab p\, dV $$
+The negative signs are because of the reverse direction of the normals. Therefore the force is $-\nab p\, \d V$.
+
+\subsection{Euler's Equations of motion}
+We can now consider some equations of motion. Consider a blob of fluid of volume $\d V$ then the force on the blob will be,
+$$ (-\nab p + \rho \vec g)\d V $$
+but this must be equal to the mass multiplied by the acceleration,
+$$ \rho \d V \Di {\vec u} t $$
+and so we can write the equations as,
+\begin{align}
+  \Di {\vec u} t &= - \frac{1}{\rho}\nab p + \vec g \label{equ:eul1}\\
+  \nab \cdot \vec u &= 0
+\end{align}
+Gravity is conservative and so $\vec g = - \nab \chi$ where $\chi = gz$. We can then write,
+$$ \pd {\vec u} t + (\vec u \cdot \nab)\vec u = - \nab \left( \frac{p}{\rho} + \chi\right) $$
+Furtermore, using $(\vec u \cdot \nab)\vec u = (\nab \times \vec u)\times \vec u + \nab (\frac{1}{2}\vec u^2)$ we can get,
+\begin{equation}
+  \pd {\vec u} t + (\nab \times \vec u)\times \vec u = - \nab \left( \frac{p}{\rho} + \frac{1}{2}\vec u^2 + \chi \right)\label{equ:eul2}
+\end{equation}
+
+\subsection{Bernoulli Streamline Theorems}
+If we have a steady flow, then Equation \ref{equ:eul2} reduces to,
+\begin{equation}
+  (\nab \times \vec u) \times \vec u = - \nab H \label{equ:bern1}
+\end{equation}
+where,
+$$ H = \frac{p}{\rho} + \frac{1}{2}\vec u^2 + \chi $$
+Further we can say, when we dot with $\vec u$ that,
+$$ (\vec u \cdot \nab)H = 0 $$
+We can take $\vec u \cdot ((\nab \times \vec u) \times \vec u)$ and call it a triple scalar product and so it's equal to $(\nab \times \vec u) \cdot (\vec u \times \vec u) = \vec 0$, the result follows. This is, $H$ is constant along the streamline. This is the same as Bernoulli's Theorems,
+\begin{nthm}[Bernoulli's Theorem for rotational flow]~
+  \begin{center}
+    \textit{If an ideal fluid is in steady state flow, then $H$ is constant along each streamline.}
+  \end{center}
+\end{nthm}
+\noindent
+We further note that this is about singular streamlines. If a fluid is irrotational, then it's constant along all of them.
+\begin{ndefi}[Irrotational Flow]
+  An irrotational flow is one such that,
+  $$ \nab \times \vec u = 0 $$
+\end{ndefi}
+
+\noindent
+Therefore, if we have a steady irrotational flow, then we can reduce \refeq{equ:bern1} down to $\nab H = 0$ and say,
+\begin{nthm}[Bernoulli's Theorem for irrotational flow]~
+  \begin{center}
+    \textit{If an ideal fluid is in steady irrational flow, then $H$ is constant throughout the whole flow field.}
+  \end{center}
+\end{nthm}
+
+\subsection{Vorticity - irrotational flow}
+We define $\o = \nab \times \vec u$ as the vorticity of the flow. In two dimensions this is simply $\o = \pd v x - \pd u y$. We can consider two perpendicular short fluid line segments AB and AC. We note that the $y$ compontent of B exceeds A by,
+$$ v(x + \d x, y, t) - v(x, y, t) \approx \pd v x \d x $$
+This is telling us that the vorticity is a measure of local rotation or spin and has nothing directly to do with the global rotation of the fluid. For example $\vec u = (\b y, 0, 0)$ is the shear flow and is irrotational, but
+$$ \o = \pd v x - \pd u y = - \b $$
+
+\noindent
+Something more colourful would be to consider
+$$ \vec u = \frac{k}{r} \vec e_\theta $$
+in cylindrical polar coordinates. We see that the vorticity is zero except when $r = 0$, when it isn't defined. Although we can clearly see that this fluid rotates, it's irrotational. If we take two short perpendicular fluid lines we can see that on either line the direction of rotation is opposite and so the cancel out. We note that as we let the fluid flow play out these lines will no longer be perpendicular and so the rotation becomes zero very quickly. If we now make our model more complicated and place a new flow into the mix,
+$$ \vec u = \O r\vec e_\theta $$
+This model does have rotation, it has vorticity of $(2\O, 0, 0)$. If we put them together,
+$$ u_\theta = \begin{cases}
+  \O r & r < a \\
+  \frac{\O a^2}{r} & r > a
+\end{cases} $$
+we obtain what is known as the Rankine vortex. This is a simple model for many different types of vortices that have small vortex cores.
+
+\subsection{The vorticity equation}
+ We can write \ref{equ:eul2} as,
+ $$ \pd {\vec u} t + \o \times \vec u = - \nab H $$
+ and then taking the curl,
+ $$ \pd {\vec \o} t + \nab \times (\o \times u) = - \nab H $$
+ Then we can reduce this down to,
+ $$ \Di {\ov} t = (\ov \cdot \nab)\vec u. $$
+Further, if we consider a 2D fluid we can reduce this to $\Di {\ov} t = 0$. That is
+\begin{center}
+  \textit{In the two dimensional flow of an ideal fluid subject to a conservative body force $\vec g$ the vorticity $\o$ of each individual fluid element is conserved.}
+\end{center}
+If we further have a steady flow, the above result reduces to,
+$$ (\vec u \cdot \nab) \o = 0 $$
+and we can say,
+\begin{center}
+  \textit{In the steady, two dimensional flow of an ideal fluid subject to a conservative body force $\vec g$ the vorticity $\o$ is constant along a streamline.}
+\end{center}
+
+\subsection{Circulation}
+Let $C$ be some closed curve lying in the fluid region. Then the circulation $\Gamma$ around $C$ is defined as,
+$$ \Gamma = \int_C \vec u \cdot d\vec x. $$
+Then we can use Stokes Theorem to consider the vorticity and what effect it has on this integral,
+$$ \int_C \vec u \cdot d \vec x = \int_S (\nab \times \vec u)\cdot \vec n dS. $$
+If we have an irrotational flow, then $\nab \times \vec u = 0$. However, to make $\Gamma = 0$ this only holds if $C$ can be spanned by a surface $S$ which lies wholly in the region of irrotational flow. If we consider a plane wing in 2D, then the problem simplifies to,
+$$ \Gamma = \int_C udx + vdy = \int_S \left( \pd v x - \pd u y \right)dx\,dy $$
+It is true that this must be zero for any curve not encompassing the wing (which is the area of rotational flow), but fails if we encompass the wing.  
