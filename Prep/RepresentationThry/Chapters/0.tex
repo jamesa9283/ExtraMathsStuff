@@ -1,0 +1,47 @@
+% !TEX root = ../notes.tex
+
+\section{Introduction to Mckay Correspondence}
+We are interested in this lecture about interaction between algebra. We want to see how groups or algebras act on vector spaces and how this applies to geometry. Traditionally, this is done through semi-simple Lie Algebras. First though, we start with Lie Algebras. Hence we start with the Mckay Correspondence. This corresponence was discovered by John Mckay in 1980 (he died earlier this year). We are interested in the corresponence to 3D things. This is related to Dynkin diagrams. These are ubigutous. We are going to restrict to the A to E type of Dynkin diagrams. We have,
+\begin{enumerate}
+  \item $A$ type, which are just a cycle, or a line segment. These is a finite $n$ vertex,
+  \item or you can branch the end to make a $D_n$ type. This creates more symmetry. The extended version creates even more dymmery.
+  \item Only $E_8$ and extended $E_8$ have no symmetry.
+\end{enumerate}
+ These diagrams classify,
+\begin{enumerate}
+  \item Simple complex Lie Algebras (simply-laced),
+  \item finite subgroups ($\SL_2(\C)$ or $\SU_2(\C)$). This is closely related to $\SO_3\R$ (my favourite matrix lie group). We can think of this as classifying 3D rotation groups and so we can classify the platonic solids and polygons due to the dihedral group.
+  \item The positive-definite symmetric Cartan matrices. $C = 2I - A$, where $A$ is an adjacency matrix.
+\end{enumerate}
+
+\subsection{Sketch of corresponence}
+This is all about different relations between these objects. If these correspondence, we are interested in (2). If we want to go from (1) to (2). Then take $N = \{x \in g : (\mathrm{ad} x)^n = 0, n >> 0\}$. This is called the nilcone. $G$ acts on $N$ via the adjoint action. For the singular case, slice to the unique $G$-orbit of the codimension $2$. Consider $g = \SL_2$, then $\mathcal {N} = \left\{ \begin{pmatrix}
+  a & b \\ c & -a
+\end{pmatrix} \right} : a^2 + bc = 0$. This nilcone isn't obvious that it is related to 2D. We can cut this cone to create something 2D. We take some point N, such that the G-orbit. In $\SL_n$, the $G$-obit is just the conjugation. We want this to have orbit to be codimension $2$. This gives you a two dimensional singularity. This creates a cone which is $\C^2 / \Gamma$. If we take $\SL_2$, then $\mathcal{N} = \C^2 / \{\pm I\}$. If we have $\SL_2$, then $x = \begin{pmatrix}
+  0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0
+\end{pmatrix}$ and $\begin{pmatrix}
+  0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & 0
+\end{pmatrix}$, this is the Slodary slice to create this cone. Hence, this gives us the correspondence from (1) to (2). To recap, we consider the nilponent matrices in a Lie algebra and consider these under a group action which is codimension 2, then you get these singularities that is isomorphic to $\C^2 / \Gamma$.
+\begin{figure}[!ht]
+\centering
+\resizebox{0.25\textwidth}{!}{\input{./figures/L1.1.pdf_tex}}
+\caption{Slodary Slice}
+\end{figure}
+
+Now let's go the opposite direction. Let's go from (2) to the diagram. One way to do it, is to take the minimal resolution of singularities. What is this? For the purposes, we replace the cone with something smooth (the complex projective line), as we see in Figure 2. You can do that. However we are going to iterate the blowup construction. We can get the diagram by looking at the fiber over $0$. We take $\widetilde{\C^2/\Gamma} \twoheadrightarrow C^2/\Gamma$ which is defined as $p^{-1}(0) \mapsto 0$. We see $p^{-1}(0)$ is the union of $\mathbb{P}_\C \cong S^2$ (Figure 2). Then we take the fiver of the cone over $O$, then we get the 2 sphere.
+
+\begin{eg}
+  Consider $\Gamma = \{\pm I\}$. Then,
+  $$ \C^2 / P = \{\pm(x, y) : (x, y) \in \C^2\} \to \left\{\begin{pmatrix}
+    a & b \\ c & -a
+  \end{pmatrix} : \det = a^2 + bc = 0\right\}$$
+  which is defined as $\pm (x, y) \mapsto \begin{pmatrix}
+    xy & -x^2 \\ y^2 & -xy
+  \end{pmatrix}$
+\end{eg}
+\begin{figure}[!ht]
+\centering
+\resizebox{0.3\textwidth}{!}{\input{./figures/L1.2.pdf_tex}}
+\caption{}
+\end{figure}
+
